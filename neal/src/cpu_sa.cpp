@@ -94,9 +94,10 @@ void simulated_annealing_run(
     const vector<vector<double>>& neighbour_couplings,
     const int sweeps_per_beta,
     const vector<double>& beta_schedule,
-    const int onehotpar
+    const vector<int>& onehotpar
 ) {
     const int num_vars = h.size();
+    const int num_groups = onehotpar.size();
 
     uint64_t rand; // this will hold the value of the rng
 
@@ -104,10 +105,10 @@ void simulated_annealing_run(
     int member_index;
     int other_index;
     int base_index;
+    int next_base_index;
     double energydiff;
     int ind1;
-    int ind2;
-    
+    int ind2; 
     
     // perform the sweeps
     for (int beta_idx = 0; beta_idx < (int)beta_schedule.size(); beta_idx++) {
@@ -123,15 +124,17 @@ void simulated_annealing_run(
             // the probability.
             const double threshold = 44.36142 / beta;
 
-            for (int group_index = 0; group_index < num_vars / onehotpar; group_index++) {
-                base_index = group_index * onehotpar;
+            base_index = 0;
+            next_base_index = group_index[0];
+
+            for (int group_index = 0; group_index < num_groups; group_index++) {
                 ind1 = 0;
 
-                while (ind1 < onehotpar) {
+                while (ind1 < next_base_index) {
                     member_index = base_index + ind1;
                     ind2 = ind1 + 1;
 
-                    while (ind2 < onehotpar) {
+                    while (ind2 < next_base_index) {
                         other_index = base_index + ind2;
                         
                         if (((state[member_index] == 1) && (state[other_index] == -1)) || ((state[member_index] == -1) && (state[other_index] == 1))) {
@@ -166,7 +169,11 @@ void simulated_annealing_run(
                         ind2++;
                     }
                     ind1++;
-                } 
+                }
+                base_index = next_base_index;
+                if (group_index == num_groups - 1) {
+                    next_base_index += onehotpar[group_index + 1]; 
+                }
             }
         }
     }
@@ -238,6 +245,7 @@ int general_simulated_annealing(
     const vector<double> beta_schedule,
     const uint64_t seed,
     const int onehotpar,
+    const vector<int> pruned_variables,
     callback interrupt_callback,
     void * const interrupt_function
 ) {
@@ -302,7 +310,7 @@ int general_simulated_annealing(
         // the sample there
         simulated_annealing_run(state, h, degrees, 
                                 neighbors, neighbour_couplings, 
-                                sweeps_per_beta, beta_schedule, onehotpar);
+                                sweeps_per_beta, beta_schedule, onehotpar, pruned_variables);
 
         // compute the energy of the sample and store it in `energies`
         energies[sample] = get_state_energy(state, h, coupler_starts, 
