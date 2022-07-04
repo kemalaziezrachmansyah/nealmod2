@@ -125,7 +125,7 @@ void simulated_annealing_run(
             const double threshold = 44.36142 / beta;
 
             base_index = 0;
-            next_base_index = group_index[0];
+            next_base_index = onehotpar[0];
 
             for (int group_index = 0; group_index < num_groups; group_index++) {
                 ind1 = 0;
