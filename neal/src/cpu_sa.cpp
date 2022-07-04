@@ -310,7 +310,7 @@ int general_simulated_annealing(
         // the sample there
         simulated_annealing_run(state, h, degrees, 
                                 neighbors, neighbour_couplings, 
-                                sweeps_per_beta, beta_schedule, onehotpar, pruned_variables);
+                                sweeps_per_beta, beta_schedule, onehotpar);
 
         // compute the energy of the sample and store it in `energies`
         energies[sample] = get_state_energy(state, h, coupler_starts, 
