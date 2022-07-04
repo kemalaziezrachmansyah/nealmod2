@@ -43,8 +43,7 @@ void simulated_annealing_run(
     const std::vector<std::vector<double>>& neighbour_couplings,
     const int sweeps_per_beta,
     const std::vector<double>& beta_schedule,
-    const int onehotpar
-    const std::vector<int>& degrees,
+    const std::vector<int>& onehotpar
 );
 
 typedef bool (*const callback)(void * const function);
@@ -60,8 +59,7 @@ int general_simulated_annealing(
     const int sweeps_per_beta,
     const std::vector<double> beta_schedule,
     const uint64_t seed,
-    const int onehotpar,
-    const std::vector<int> pruned_variables,
+    const std::vector<int> onehotpar,
     callback interrupt_callback,
     void * const interrupt_function
 );
