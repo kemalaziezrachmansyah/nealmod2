@@ -264,6 +264,8 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
             parsed.initial_states.record.sample)
 
         variable_order = parsed.initial_states.variables
+        
+        print('variable_order: ', variable_order)
 
         # read out the BQM
         ldata, (irow, icol, qdata), off = bqm.to_numpy_vectors(
