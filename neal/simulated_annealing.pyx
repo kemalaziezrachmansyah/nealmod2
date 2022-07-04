@@ -129,8 +129,6 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     cdef unsigned long long _seed = seed
     cdef vector[int] _onehotpar = onehotpar
 
-    print('_onehotpar', onehotpar)
-
     cdef void* _interrupt_function
     if interrupt_function is None:
         _interrupt_function = NULL
