@@ -44,6 +44,7 @@ void simulated_annealing_run(
     const int sweeps_per_beta,
     const std::vector<double>& beta_schedule,
     const int onehotpar
+    const std::vector<std::vector<int>>& pruned_variables,
 );
 
 typedef bool (*const callback)(void * const function);
@@ -60,6 +61,7 @@ int general_simulated_annealing(
     const std::vector<double> beta_schedule,
     const uint64_t seed,
     const int onehotpar,
+    const std::vector<int> pruned_variables,
     callback interrupt_callback,
     void * const interrupt_function
 );
