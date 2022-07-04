@@ -171,9 +171,9 @@ void simulated_annealing_run(
                     ind1++;
                 }
                 base_index = next_base_index;
-                // if (group_index < (num_groups - 1)) {
-                //    next_base_index += onehotpar[(group_index + 1)]; 
-                //}
+                if (group_index < (num_groups - 4)) {
+                    next_base_index += 70; //onehotpar[(group_index + 1)]; 
+                }
             }
         }
     }
