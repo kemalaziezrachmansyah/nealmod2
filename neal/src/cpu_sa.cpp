@@ -130,11 +130,11 @@ void simulated_annealing_run(
             for (int group_index = 0; group_index < num_groups; group_index++) {
                 ind1 = 0;
 
-                while (ind1 < next_base_index) {
+                while (ind1 < onehotpar[group_index]) {
                     member_index = base_index + ind1;
                     ind2 = ind1 + 1;
 
-                    while (ind2 < next_base_index) {
+                    while (ind2 < onehotpar[group_index]) {
                         other_index = base_index + ind2;
                         
                         if (((state[member_index] == 1) && (state[other_index] == -1)) || ((state[member_index] == -1) && (state[other_index] == 1))) {
@@ -171,8 +171,8 @@ void simulated_annealing_run(
                     ind1++;
                 }
                 base_index = next_base_index;
-                if (group_index < (num_groups - 4)) {
-                    next_base_index += 70; //onehotpar[(group_index + 1)]; 
+                if (group_index < (num_groups - 1)) {
+                    next_base_index += onehotpar[(group_index + 1)]; 
                 }
             }
         }
