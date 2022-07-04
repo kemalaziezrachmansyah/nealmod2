@@ -117,7 +117,7 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     energies_numpy = np.empty(num_samples, dtype=np.float64)
     cdef double[:] energies = energies_numpy
     
-    with numpy.printoptions(threshold=numpy.inf):
+    with np.printoptions(threshold=numpy.inf):
         print('states_numpy: ', states_numpy)
 
     # explicitly convert all Python types to C while we have the GIL
