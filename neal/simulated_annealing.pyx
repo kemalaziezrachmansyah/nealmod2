@@ -19,6 +19,7 @@ from libcpp cimport bool
 from libcpp.vector cimport vector
 
 import numpy as np
+import sys
 cimport numpy as np
 
 
@@ -116,7 +117,8 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     energies_numpy = np.empty(num_samples, dtype=np.float64)
     cdef double[:] energies = energies_numpy
     
-    print('states_numpy: ', states_numpy)
+    with numpy.printoptions(threshold=numpy.inf):
+        print('states_numpy: ', states_numpy)
 
     # explicitly convert all Python types to C while we have the GIL
     cdef char* _states = &states_numpy[0,0]
