@@ -104,6 +104,7 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
                            'beta_schedule_type': ['beta_schedule_options'],
                            'seed': [],
                            'onehotpar': [],
+                           'pruned_variables': [],
                            'interrupt_function': [],
                            'initial_states': [],
                            'initial_states_generator': [],
@@ -112,7 +113,7 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
                                                      'custom')}
 
     def sample(self, bqm, beta_range=None, num_reads=None, num_sweeps = None,
-               num_sweeps_per_beta=1, beta_schedule_type="geometric", seed=None, onehotpar = None,
+               num_sweeps_per_beta=1, beta_schedule_type="geometric", seed=None, onehotpar = None, pruned_variables = None,
                interrupt_function=None, beta_schedule = None,
                initial_states=None, initial_states_generator="random",
                **kwargs):
@@ -338,7 +339,7 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
         samples, energies = sa.simulated_annealing(
             num_reads, ldata, irow, icol, qdata,
             num_sweeps_per_beta, beta_schedule,
-            seed, onehotpar, initial_states_array, interrupt_function)
+            seed, onehotpar, pruned_variables, initial_states_array, interrupt_function)
 
         info = {
             "beta_range": beta_range,
