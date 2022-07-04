@@ -244,7 +244,7 @@ int general_simulated_annealing(
     const int sweeps_per_beta,
     const vector<double> beta_schedule,
     const uint64_t seed,
-    const int onehotpar,
+    const vector<int> onehotpar,
     const vector<int> pruned_variables,
     callback interrupt_callback,
     void * const interrupt_function
