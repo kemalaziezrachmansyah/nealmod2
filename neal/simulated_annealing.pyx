@@ -37,12 +37,13 @@ cdef extern from "cpu_sa.h":
             const vector[double] & beta_schedule,
             const unsigned long long seed,
             const int onehotpar,
+            const vector[int] & pruned_variables,
             callback interrupt_callback,
             void *interrupt_function) nogil
 
 
 def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
-                        coupler_weights, sweeps_per_beta, beta_schedule, seed, onehotpar,
+                        coupler_weights, sweeps_per_beta, beta_schedule, seed, onehotpar, pruned_variables,
                         np.ndarray[char, ndim=2, mode="c"] states_numpy,
                         interrupt_function=None):
     """Wraps `general_simulated_annealing` from `cpu_sa.cpp`. Accepts
@@ -128,6 +129,7 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     cdef vector[double] _beta_schedule = beta_schedule
     cdef unsigned long long _seed = seed
     cdef int _onehotpar = onehotpar
+    cdef vector[int] _pruned_variables = pruned_variables
 
     cdef void* _interrupt_function
     if interrupt_function is None:
@@ -147,6 +149,7 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
                                           _beta_schedule,
                                           _seed,
                                           _onehotpar,
+                                          _pruned_variables,
                                           interrupt_callback,
                                           _interrupt_function)
 
