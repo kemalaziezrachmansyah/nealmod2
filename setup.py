@@ -70,7 +70,9 @@ install_requires = []
 #                    'numpy>=1.19.1,<2.0.0',
 #                    ]
 
-setup_requires = ['numpy>=1.19.1,<2.0.0,!=1.21.0,!=1.21.1']
+setup_requires = []
+
+# setup_requires = ['numpy>=1.19.1,<2.0.0,!=1.21.0,!=1.21.1']
 
 classifiers = [
     'License :: OSI Approved :: Apache Software License',
