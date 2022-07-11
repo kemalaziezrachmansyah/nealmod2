@@ -80,7 +80,7 @@ classifiers = [
     'Programming Language :: Python :: 3.10',
 ]
 
-python_requires = '>=3.7'
+python_requires = '>=3.5'
 
 # add __version__, __author__, __authoremail__, __description__ to this namespace
 exec(open("./neal/package_info.py").read())
