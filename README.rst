@@ -10,10 +10,27 @@
 .. image:: https://circleci.com/gh/dwavesystems/dwave-neal.svg?style=svg
     :target: https://circleci.com/gh/dwavesystems/dwave-neal
 
-dwave-neal
+Modified dwave-neal
 ==========
 
 .. index-start-marker
+
+Modification Notice
+-------------
+
+This is a modification of dwave-neal package from D-Wave System's https://github.com/dwavesystems/dwave-neal.
+External one-hot constraint, which means that in some group of variables, only one of them can have value one, is implemented into the annealing algorithm.
+Variable pruning, that is reducing the number of variables in the problem before submitting it into the annealing algorithm, can also be implemented more easily by this modified package.
+The modified files are the following:
+- neal/sampler.py
+- neal/simulated_annealing.pyx
+- neal/src/cpu_sa.cpp
+- neal/src/cpu_sa.h
+
+Please also chech the installation section to install this package. Note that it will overwrite the original dwave-neal.
+
+Introduction
+-------------
 
 An implementation of a simulated annealing sampler.
 
@@ -49,11 +66,21 @@ Installation
 
 .. installation-start-marker
 
-To install:
+1. Install git.
+
+2. Install visual studio cpp build tools.
+
+3. If you have dwave-neal installed before, uninstall it first by
 
 .. code-block:: bash
 
-    pip install dwave-neal
+    pip uninstall dwave-neal
+
+4. To install:
+
+.. code-block:: bash
+
+    pip install git+https://github.com/kemalaziezrachmansyah/nealmod.git#egg=dwave-neal
 
 To build from source:
 
