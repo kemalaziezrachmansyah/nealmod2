@@ -21,10 +21,15 @@ Modification Notice
 This is a modification of dwave-neal package from D-Wave System's https://github.com/dwavesystems/dwave-neal.
 External one-hot constraint, which means that in some group of variables, only one of them can have value one, is implemented into the annealing algorithm.
 Variable pruning, that is reducing the number of variables in the problem before submitting it into the annealing algorithm, can also be implemented more easily by this modified package.
+
 The modified files are the following:
+
 - neal/sampler.py
+
 - neal/simulated_annealing.pyx
+
 - neal/src/cpu_sa.cpp
+
 - neal/src/cpu_sa.h
 
 Please also chech the installation section to install this package. Note that it will overwrite the original dwave-neal.
